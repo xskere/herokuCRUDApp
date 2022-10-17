@@ -1,0 +1,131 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentTutorial.id">
+    <h4>CRUD 4 types</h4>
+    <div>
+      <label><strong>First String:</strong></label> {{ currentTutorial.thestring }}
+    </div>
+    <div>
+      <label><strong>The number:</strong></label>
+      {{ currentTutorial.thenumber }}
+    </div>
+    <div>
+      <label><strong>The first string of the array:</strong></label>
+      {{ currentTutorial.arrayfirst }}
+    </div>
+    <div>
+      <label><strong>The second string of the array:</strong></label>
+      {{ currentTutorial.arraysecond }}
+    </div>
+    <div>
+      <label><strong>The boolean:</strong></label>
+      {{ currentTutorial.theboolean ? "True" : "False" }}
+    </div>
+
+    <a
+      class="badge badge-warning"
+      routerLink="/tutorials/{{ currentTutorial.id }}"
+    >
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentTutorial">
+    <br />
+    <p>Please click on one of these...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentTutorial.id" class="edit-form">
+    <h4>CRUD</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">The string</label>
+        <input
+          type="text"
+          class="form-control"
+          id="thestring"
+          [(ngModel)]="currentTutorial.thestring"
+          name="thestring"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">The number</label>
+        <input
+          type="number"
+          class="form-control"
+          id="thenumber"
+          [(ngModel)]="currentTutorial.thenumber"
+          name="thenumber"
+        />
+      </div>
+      <div class="form-group">
+        <label for="title">The first string of the array</label>
+        <input
+          type="text"
+          class="form-control"
+          id="arrayfirst"
+          [(ngModel)]="currentTutorial.arrayfirst"
+          name="arrayfirst"
+        />
+      </div>
+      <div class="form-group">
+        <label for="title">The second string of the array</label>
+        <input
+          type="text"
+          class="form-control"
+          id="arraysecond"
+          [(ngModel)]="currentTutorial.arraysecond"
+          name="arraysecond"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><strong>The boolean:</strong></label>
+        {{ currentTutorial.theboolean ? "True" : "False" }}
+      </div>
+    </form>
+
+    <button
+      class="badge badge-primary mr-2"
+      *ngIf="currentTutorial.theboolean"
+      (click)="updatePublished(false)"
+    >
+      Set to false
+    </button>
+    <button
+      *ngIf="!currentTutorial.theboolean"
+      class="badge badge-primary mr-2"
+      (click)="updatePublished(true)"
+    >
+      Set to true
+    </button>
+
+    <button class="badge badge-danger mr-2" (click)="deleteTutorial()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      *ngIf="currentTutorial.theboolean"
+      (click)="updateTutorial(true)"
+    >
+      Update
+    </button>
+    <button
+    type="submit"
+    class="badge badge-success mb-2"
+    *ngIf="!currentTutorial.theboolean"
+    (click)="updateTutorial(false)"
+  >
+    Update
+  </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentTutorial.id">
+    <br />
+    <p>Cannot access this data...</p>
+  </div>
+</ng-template>

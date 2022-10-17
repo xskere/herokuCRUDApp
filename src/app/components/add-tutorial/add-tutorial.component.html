@@ -1,0 +1,60 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="title">The string</label>
+        <input
+          type="text"
+          class="form-control"
+          id="thestring"
+          required
+          [(ngModel)]="tutorial.thestring"
+          name="thestring"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">The number</label>
+        <input
+          class="form-control"
+          type="number"
+          id="thenumber"
+          required
+          [(ngModel)]="tutorial.thenumber"
+          name="thenumber"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="title">The first element of the string</label>
+        <input
+          type="text"
+          class="form-control"
+          id="arrayfirst"
+          required
+          [(ngModel)]="tutorial.arrayfirst"
+          name="arrayfirst"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="title">The second element of the string</label>
+        <input
+          type="text"
+          class="form-control"
+          id="arraysecond"
+          required
+          [(ngModel)]="tutorial.arraysecond"
+          name="arraysecond"
+        />
+      </div>
+
+      <button (click)="saveTutorial()" class="btn btn-success">Submit</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Data was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newTutorial()">Add</button>
+    </div>
+  </div>
+</div>
